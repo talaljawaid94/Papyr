@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FreePDF — Edit, fill &amp; sign PDFs. Free and private.</title>
+    <meta name="description" content="Free, private PDF editor. Fill forms, add text, check boxes, shapes and signatures. Your files never leave your device." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d0f13" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="FreePDF — Edit, fill &amp; sign PDFs. Free and private." />
+    <meta property="og:description" content="Fill forms, add text, tick boxes, draw shapes and sign PDFs in your browser. Free, no sign-up, and your files never leave your device." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="FreePDF — Edit, fill &amp; sign PDFs" />
+    <meta name="twitter:description" content="Free, private PDF editor that runs entirely in your browser." />
+    <noscript><style>.landing~.pages{display:none}</style></noscript>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z" fill="currentColor" opacity=".25"/><path d="M6 3h8l5 5v13H6zM14 3v5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 16.5l2-.5 4.5-4.5-1.5-1.5-4.5 4.5z" fill="currentColor"/></svg>
+        </span>
+        <span class="brand-name">FreePDF</span>
+      </div>
+      <div class="doc-actions" data-needs-doc>
+        <button class="btn ghost" id="btn-open" title="Open another PDF" data-icon="open"><span class="lbl">Open</span></button>
+        <span class="file-name" id="file-name"></span>
+      </div>
+      <div class="spacer"></div>
+      <div class="group" data-needs-doc>
+        <button class="icon-btn" id="btn-undo" title="Undo (Ctrl+Z)" aria-label="Undo" data-icon="undo"></button>
+        <button class="icon-btn" id="btn-redo" title="Redo (Ctrl+Shift+Z)" aria-label="Redo" data-icon="redo"></button>
+      </div>
+      <div class="group zoom" data-needs-doc>
+        <button class="icon-btn" id="btn-zoom-out" title="Zoom out" aria-label="Zoom out" data-icon="minus"></button>
+        <button class="zoom-val" id="zoom-val" title="Fit to width">100%</button>
+        <button class="icon-btn" id="btn-zoom-in" title="Zoom in" aria-label="Zoom in" data-icon="plus"></button>
+      </div>
+      <label class="flatten" id="flatten-wrap" hidden title="Make filled form fields permanent (no longer editable)">
+        <input type="checkbox" id="flatten" /> Flatten form
+      </label>
+      <button class="btn primary" id="btn-download" data-needs-doc data-icon="download"><span class="lbl">Download</span></button>
+    </header>
+
+    <div class="workspace">
+      <nav class="toolbar" id="toolbar" aria-label="Tools" data-needs-doc></nav>
+      <div class="main">
+        <div class="propbar" id="propbar" data-needs-doc></div>
+        <div class="viewer" id="viewer">
+          <section class="landing" id="landing">
+            <nav class="l-nav">
+              <a class="l-brand" href="#landing" aria-label="FreePDF home">
+                <span class="l-logo" aria-hidden="true"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M11 8h7.5l4.5 4.5V24H11z" fill="#fff"/><path d="M18.5 8v4.5H23" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 20.5l2.2-.5 4-4-1.7-1.7-4 4z" fill="currentColor"/></svg></span>
+                FreePDF
+              </a>
+              <div class="l-links">
+                <a href="#features">Features</a>
+                <a href="#how">How it works</a>
+                <a href="#privacy">Privacy</a>
+              </div>
+              <label class="l-btn l-btn-dark l-nav-cta" for="file-input">Open a PDF</label>
+            </nav>
+
+            <header class="l-hero">
+              <div class="l-hero-copy">
+                <p class="l-eyebrow"><span class="l-dot"></span> Free forever · No account · No uploads</p>
+                <h1>The PDF editor that never sees <em>your&nbsp;files.</em></h1>
+                <p class="l-lede">Fill forms, tick boxes, add text and sign documents with a professional editor that runs entirely in your browser. Nothing is uploaded, stored or tracked.</p>
+
+                <label class="l-drop" id="dropzone">
+                  <input type="file" id="file-input" accept="application/pdf,.pdf" hidden />
+                  <span class="l-drop-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M7.5 8.5L12 4l4.5 4.5"/><path d="M4 15v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg></span>
+                  <span class="l-drop-text"><strong>Choose a PDF</strong><span>or drag &amp; drop it anywhere on this page</span></span>
+                  <span class="l-btn l-btn-dark">Select file</span>
+                </label>
+                <div class="l-hero-meta">
+                  <button class="l-link" id="btn-sample">Try it with a sample form <span aria-hidden="true">→</span></button>
+                  <span class="l-sep" aria-hidden="true"></span>
+                  <span class="l-muted">Nothing to install</span>
+                </div>
+              </div>
+
+              <div class="l-visual" aria-hidden="true">
+                <div class="l-glow"></div>
+                <div class="l-toolpill">
+                  <span class="on"><svg viewBox="0 0 24 24"><path d="M5 7V5h14v2M12 5v14M9 19h6"/></svg></span>
+                  <span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+                  <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span>
+                  <span><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="1.5"/></svg></span>
+                  <i></i>
+                  <span><svg viewBox="0 0 24 24"><path d="M3 16c2.5-3 3.5-9 6-9 2 0-1 9 1.5 9 2 0 2.5-4 4.5-4 1.5 0 .5 3 2 3 1 0 2-1 3.5-1.5"/></svg></span>
+                </div>
+                <div class="l-paper">
+                  <div class="l-paper-head">
+                    <div>
+                      <div class="l-paper-kicker">Residential lease</div>
+                      <div class="l-paper-title">Rental Application</div>
+                    </div>
+                    <div class="l-paper-no">No. 0427</div>
+                  </div>
+                  <div class="l-row"><span>Full name</span><b class="ink">Amelia Hart</b></div>
+                  <div class="l-row"><span>Email</span><b class="ink sm">amelia.hart@mail.com</b></div>
+                  <div class="l-row l-row-sel"><span>Move-in date</span><b class="ink">1 November 2026<i class="h h1"></i><i class="h h2"></i><i class="h h3"></i><i class="h h4"></i></b></div>
+                  <div class="l-checks">
+                    <span class="l-box on"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span> Pets
+                    <span class="l-box"></span> Parking
+                    <span class="l-box on"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span> Storage
+                  </div>
+                  <div class="l-mark"><span class="l-hl">I confirm the details above are accurate.</span></div>
+                  <div class="l-sign">
+                    <div class="l-sig">Amelia Hart</div>
+                    <div class="l-sign-line"><span>Signature</span><span>Date · 01/10/2026</span></div>
+                  </div>
+                </div>
+                <div class="l-badge">
+                  <span class="l-badge-ic"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg></span>
+                  <span><strong>0 bytes uploaded</strong><small>Processed on this device</small></span>
+                </div>
+              </div>
+            </header>
+
+            <ul class="l-trust">
+              <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>No sign-up</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>No watermarks</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>No file-size or task limits</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Works on phone &amp; desktop</li>
+            </ul>
+
+            <section class="l-section" id="features">
+              <div class="l-head">
+                <p class="l-kicker">Everything a form asks of you</p>
+                <h2>All the tools you reach for. <em>None of the paywalls.</em></h2>
+              </div>
+              <div class="l-bento">
+                <article class="l-card l-card-wide">
+                  <div class="l-card-ic" data-icon="text"></div>
+                  <h3>Type anywhere on the page</h3>
+                  <p>Click a blank line and start typing. Fillable fields are detected automatically and filled natively.</p>
+                  <div class="l-fonts">
+                    <span style="font-family:Helvetica,Arial,sans-serif">Sans</span>
+                    <span style="font-family:'Times New Roman',Times,serif">Serif</span>
+                    <span style="font-family:'Courier New',monospace">Mono</span>
+                    <span style="font-family:'FPE Kalam',cursive">Handwriting</span>
+                    <span style="font-family:'FPE Dancing Script',cursive">Script</span>
+                  </div>
+                </article>
+                <article class="l-card">
+                  <div class="l-card-ic" data-icon="check"></div>
+                  <h3>Ticks, crosses &amp; choices</h3>
+                  <p>Mark checkboxes and radio options on any printed form in one click.</p>
+                </article>
+                <article class="l-card">
+                  <div class="l-card-ic" data-icon="signature"></div>
+                  <h3>Sign &amp; initial</h3>
+                  <p>Draw, type or upload a signature. Background removal included.</p>
+                </article>
+                <article class="l-card">
+                  <div class="l-card-ic" data-icon="rect"></div>
+                  <h3>Shapes &amp; arrows</h3>
+                  <p>Boxes, circles, lines and arrows with stroke, fill and opacity.</p>
+                </article>
+                <article class="l-card">
+                  <div class="l-card-ic" data-icon="undo"></div>
+                  <h3>Nothing is final</h3>
+                  <p>Move, resize, restyle or undo any edit right up until you download.</p>
+                </article>
+                <article class="l-card l-card-wide l-card-split">
+                  <div>
+                    <div class="l-card-ic" data-icon="highlight"></div>
+                    <h3>Mark up, cover up</h3>
+                    <p>Highlight passages, white-out mistakes, draw freehand or drop in an image.</p>
+                  </div>
+                  <div class="l-swatches" aria-hidden="true">
+                    <i style="background:#fde047"></i><i style="background:#86efac"></i><i style="background:#f9a8d4"></i><i style="background:#93c5fd"></i>
+                  </div>
+                </article>
+                <article class="l-card">
+                  <div class="l-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg></div>
+                  <h3>Phone, tablet or desktop</h3>
+                  <p>Sign on the go with your finger. Nothing to install.</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="l-section" id="how">
+              <div class="l-head">
+                <p class="l-kicker">How it works</p>
+                <h2>Three steps. <em>Under a minute.</em></h2>
+              </div>
+              <ol class="l-steps">
+                <li><span class="l-num">01</span><h3>Open your PDF</h3><p>Choose a file or drop it in. It opens instantly, right here in your browser.</p></li>
+                <li><span class="l-num">02</span><h3>Fill, mark &amp; sign</h3><p>Type, tick, draw and sign using the toolbar. Undo anything, move everything.</p></li>
+                <li><span class="l-num">03</span><h3>Download</h3><p>Get a clean, standard PDF with selectable text, ready to send.</p></li>
+              </ol>
+            </section>
+
+            <section class="l-section" id="privacy">
+              <div class="l-privacy">
+                <div class="l-privacy-copy">
+                  <p class="l-kicker">Private by design</p>
+                  <h2>Your documents stay <em>on your device.</em></h2>
+                  <p>Most online editors upload your files to their servers to process them. FreePDF does all the work locally, in your browser. Leases, tax forms and medical paperwork never leave your computer.</p>
+                </div>
+                <table class="l-compare">
+                  <thead><tr><th></th><th>FreePDF</th><th>Typical online editors</th></tr></thead>
+                  <tbody>
+                    <tr><td>Files uploaded to a server</td><td class="yes">Never</td><td>Yes</td></tr>
+                    <tr><td>Account required</td><td class="yes">No</td><td>Often</td></tr>
+                    <tr><td>Hourly or daily task limits</td><td class="yes">None</td><td>Common</td></tr>
+                    <tr><td>Price</td><td class="yes">Free</td><td>Free tier + subscription</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="l-cta">
+              <h2>Finish your next form <em>in seconds.</em></h2>
+              <label class="l-btn l-btn-light l-btn-lg" for="file-input">Open a PDF</label>
+            </section>
+
+            <footer class="l-foot">
+              <span>© 2026 FreePDF</span>
+              <span>Built on pdf.js and pdf-lib · Open-licence fonts</span>
+            </footer>
+          </section>
+          <div class="pages" id="pages"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="drop-overlay" id="drop-overlay">Drop PDF to open</div>
+    <input type="file" id="image-input" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+
+    <dialog id="sig-dialog" class="sig-dialog" aria-labelledby="sig-title">
+      <div class="sig-head">
+        <h2 class="sig-title" id="sig-title">Add your signature</h2>
+        <button class="sig-close icon-btn" aria-label="Close">×</button>
+      </div>
+      <div class="sig-saved" hidden></div>
+      <div class="sig-tabs" role="tablist">
+        <button role="tab" data-sig-tab="draw">Draw</button>
+        <button role="tab" data-sig-tab="type">Type</button>
+        <button role="tab" data-sig-tab="upload">Upload</button>
+        <div class="sig-colors" aria-label="Ink color"></div>
+      </div>
+      <div data-sig-panel="draw" class="sig-panel">
+        <div class="sig-pad">
+          <canvas id="sig-canvas"></canvas>
+          <div class="sig-baseline"></div>
+          <div class="sig-hint">Draw here with your mouse, trackpad or finger</div>
+        </div>
+        <button class="link-btn" id="sig-clear">Clear</button>
+      </div>
+      <div data-sig-panel="type" class="sig-panel" hidden>
+        <input type="text" id="sig-type-input" class="input" autocomplete="name" />
+        <div class="sig-fonts"></div>
+      </div>
+      <div data-sig-panel="upload" class="sig-panel" hidden>
+        <label class="sig-upload">
+          <input type="file" id="sig-file" accept="image/*" />
+        </label>
+        <div class="sig-upload-preview"></div>
+        <label class="check-label"><input type="checkbox" id="sig-remove-bg" checked /> Remove white background</label>
+      </div>
+      <p class="sig-error" role="alert"></p>
+      <div class="sig-foot">
+        <label class="check-label"><input type="checkbox" id="sig-remember" checked /> Save on this device for next time</label>
+        <div class="spacer"></div>
+        <button class="btn ghost" id="sig-cancel">Cancel</button>
+        <button class="btn primary" id="sig-use">Use signature</button>
+      </div>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
