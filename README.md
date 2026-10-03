@@ -87,12 +87,42 @@ requests), HSTS, `no-referrer`, clickjacking protection, and long-lived caching 
 `npm run preview` applies the same headers, so a policy change that breaks the app shows up locally.
 If you add a CDN, analytics or an embedded iframe, update the policy in `vercel.json` first.
 
+## Day-to-day workflow: branch, review live, merge
+
+`main` is the live website. Never work on it directly. Every other branch gets its own private
+preview link from Vercel, so you can review changes on a real URL before they go live.
+
+```bash
+git switch -c short-name-of-change     # 1. new branch from main
+npm run dev                            # 2. build and test locally
+git add -A && git commit -m "What I changed"
+git push                               # 3. publish the branch (first push sets up tracking)
+```
+
+4. Open a **pull request** on GitHub (it offers a button right after you push). Vercel posts a **preview link** on it.
+5. Check the preview on desktop and phone. A GitHub check also confirms the production build passes.
+6. Happy? **Merge** the pull request. Vercel deploys `main` to the live site automatically.
+7. Tidy up locally: `git switch main && git pull && git branch -d short-name-of-change`
+
+Not happy? Push more commits to the same branch and the preview updates. Close the pull
+request to throw the change away. The live site is never touched until you merge.
+
+Guard rails in this repo:
+- `.githooks/pre-push` stops accidental direct pushes to `main` (override once with `ALLOW_MAIN_PUSH=1 git push`).
+- `.github/workflows/ci.yml` builds every pull request, so a broken build is flagged before merging.
+- `.github/pull_request_template.md` adds a short review checklist to each pull request.
+
+Optional, on GitHub: **Settings → Branches → Add rule** for `main`, tick *Require a pull request before merging*
+and *Require status checks to pass* (choose **build**). This makes GitHub itself refuse direct pushes. Branch
+protection on private repositories needs a paid GitHub plan; public repositories get it free.
+
 ## Deploy to Vercel (free)
 
 1. Push this folder to a GitHub repository.
 2. In Vercel: **Add New → Project**, import the repo. The framework (Vite), build command
    (`npm run build`) and output directory (`dist`) are picked up from `vercel.json`.
 3. Deploy. The Hobby plan is free, and there are no serverless functions or storage to bill.
+4. Production deploys come from `main`; every other branch gets a preview URL (see the workflow above).
 
 Or use the CLI: `npx vercel` (then `npx vercel --prod`).
 
