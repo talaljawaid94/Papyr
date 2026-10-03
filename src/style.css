@@ -65,9 +65,9 @@ button:disabled { cursor: default; opacity: 0.4; }
   z-index: 20;
 }
 .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.01em; }
-.brand-mark { width: 28px; height: 28px; color: var(--accent); }
-.brand-mark svg { width: 100%; height: 100%; }
-.brand-name { font-size: 17px; }
+.brand-logo { display: block; line-height: 0; }
+.brand-logo img { display: block; height: 100%; width: auto; }
+.brand .brand-logo { height: 24px; }
 .doc-actions { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .file-name {
   color: var(--muted); font-size: 13px; max-width: 280px; min-width: 0;
@@ -337,8 +337,7 @@ body:not(.has-doc) .viewer { background: var(--l-bg); }
   display: flex; align-items: center; gap: 32px;
 }
 .l-brand { display: flex; align-items: center; gap: 10px; font-weight: 650; font-size: 17px; letter-spacing: -0.02em; color: var(--l-ink); text-decoration: none; }
-.l-logo { width: 30px; height: 30px; color: var(--l-ink); display: block; }
-.l-logo svg { width: 100%; height: 100%; display: block; }
+.l-brand .brand-logo { height: 30px; }
 .l-links { display: flex; gap: 28px; margin-left: auto; }
 .l-links a { color: var(--l-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
 .l-links a:hover { color: var(--l-ink); }
@@ -650,7 +649,7 @@ body.busy { cursor: progress; }
 
 @media (max-width: 720px) {
   .topbar { padding: 0 10px; gap: 6px; }
-  .brand-name, .file-name, .btn .lbl, .zoom { display: none; }
+  .file-name, .btn .lbl, .zoom { display: none; }
   .btn { padding: 0 10px; }
   .flatten { font-size: 12px; }
   .workspace { flex-direction: column-reverse; }
